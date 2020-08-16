@@ -27,9 +27,10 @@ html(lang="ja")
           if isPostedByAdmin 
             h3 #{post.id} : 管理人 ★
           else
-            h3 #{post.id} : ID:#{post.trackingCookie}
+            - var originalTrackingId = post.trackingCookie ? post.trackingCookie.split('_')[0] : ''
+            h3 #{post.id} : ID:#{originalTrackingId}
         div.card-body
-          p!= post.content
+          p.card-text(style="white-space:pre; overflow:auto;") #{post.content}
         div.card-footer
           p 投稿日時: #{post.formattedCreatedAt}
           - var isAdmin = (user === "admin")
