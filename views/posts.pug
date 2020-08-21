@@ -16,8 +16,10 @@ html(lang="ja")
     form(action="/posts", method="post")
       div.form-group
         textarea(name="content", cols="40", rows="4").form-control
+        input(type="hidden" name="oneTimeToken" value=oneTimeToken)
       div.form-group
         button(type="submit").btn.btn-primary 投稿
+      div.row
     
     h2 投稿一覧
     each post in posts
@@ -39,7 +41,8 @@ html(lang="ja")
           - var isDeletable = (user === post.postedBy || isAdmin)
           if isDeletable
             form(action="/posts?delete=1", method="post")
-              input(type="hidden", name="id", value=post.id)
+              input(type="hidden" name="id" value=post.id)
+              input(type="hidden" name="oneTimeToken" value=oneTimeToken)
               button(type="submit") 削除
 
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
